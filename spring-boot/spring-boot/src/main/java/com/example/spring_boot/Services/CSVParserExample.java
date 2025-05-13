@@ -24,11 +24,12 @@ public class CSVParserExample {
         ClassPathResource resource = new ClassPathResource("data/" + filename);
         try (InputStream inputStream = resource.getInputStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
-                        .withDelimiter(';') 
-                        .withFirstRecordAsHeader()
-                        .withIgnoreHeaderCase()
-                        .withTrim())) {
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.builder()
+                        .setDelimiter(';')
+                        .setHeader()
+                        .setIgnoreHeaderCase(true)
+                        .setTrim(true)
+                        .build())) {
 
             for (CSVRecord record : csvParser) {
                 FirstDTOExample product = new FirstDTOExample();
