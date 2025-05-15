@@ -20,7 +20,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "discounts", uniqueConstraints = { 
-     @UniqueConstraint(columnNames = {"product_id", "supermarket_id", "date", "percentage", "from_date", "to_date"})
+     @UniqueConstraint(columnNames = {"product_id", "supermarket_id", "percentage", "from_date", "to_date"})
 })
 @Getter
 @Setter
@@ -30,7 +30,7 @@ public class Discount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)

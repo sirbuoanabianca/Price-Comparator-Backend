@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "shopping_list_items", uniqueConstraints = {
+@Table(name = "shopping_list_item", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"shopping_list_id", "product_id", "unit", "quantity_desired"})
 })
 @Getter
@@ -29,7 +29,7 @@ public class ShoppingListItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "shopping_list_id", nullable = false)

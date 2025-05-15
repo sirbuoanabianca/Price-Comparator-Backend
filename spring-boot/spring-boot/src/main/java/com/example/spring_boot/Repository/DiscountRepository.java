@@ -1,12 +1,10 @@
 package com.example.spring_boot.Repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.spring_boot.Model.Product;
+import com.example.spring_boot.Model.Discount;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface DiscountRepository extends JpaRepository<Discount, Integer> {
 }

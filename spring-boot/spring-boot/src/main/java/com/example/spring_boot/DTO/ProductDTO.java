@@ -10,16 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class FirstDTOExample {
+public class ProductDTO {
     
     private String id;
     private String name;
     private String category;
     private String brand;
-    private double quantity;
-    private String unit;
-    private double price;
-    private String currency;
 
 @Override
 public String toString() {
@@ -27,10 +23,6 @@ public String toString() {
             "name='" + name + '\'' +
             ", brand='" + brand + '\'' +
             ", category='" + category + '\'' +
-            ", unit='" + unit + '\'' +
-            ", quantity=" + quantity +
-            ", price=" + price +
-            ", currency='" + currency + '\'' +
             '}';
 }
 }

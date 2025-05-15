@@ -30,7 +30,7 @@ public class ProductSupermarket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Integer id; 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
@@ -51,7 +51,6 @@ public class ProductSupermarket {
 
     @Column(name = "quantity", nullable = false, precision = 10, scale = 2)
     private BigDecimal quantity;
-
 
     @Column(name = "date", nullable = false) 
     private LocalDate date; 
