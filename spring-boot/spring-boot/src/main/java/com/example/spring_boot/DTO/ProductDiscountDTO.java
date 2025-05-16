@@ -1,5 +1,7 @@
 package com.example.spring_boot.DTO;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class ProductDTO {
+public class ProductDiscountDTO {
     
     private Integer id;
     private String name;
-    private String category;
     private String brand;
+    private String category;
+    private String supermarketName;
+    private BigDecimal discountPercentage;
+    
 
 @Override
 public String toString() {
@@ -23,6 +28,8 @@ public String toString() {
             "name='" + name + '\'' +
             ", brand='" + brand + '\'' +
             ", category='" + category + '\'' +
+            ", supermarket='" + supermarketName + '\'' +
+            ", discount percentage='" + discountPercentage + '\'' +
             '}';
 }
 }
