@@ -22,9 +22,14 @@ public class DiscountController {
     public ResponseEntity<?> listProductsHighestPercentage() {
 
         List<ProductDiscountDTO> products = discountService.listProductsHighestPercentage();
-        if (products.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
+        return ResponseEntity.ok(products);
+
+    }
+
+    @GetMapping("/new-discounts")
+    public ResponseEntity<?> listNewDiscounts() {
+
+        List<ProductDiscountDTO> products = discountService.listNewDiscounts();
         return ResponseEntity.ok(products);
 
     }

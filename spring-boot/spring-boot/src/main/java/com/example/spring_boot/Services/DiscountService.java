@@ -27,4 +27,12 @@ public class DiscountService {
         return products;
     
        }
+
+       public List<ProductDiscountDTO> listNewDiscounts() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate last24Hours = currentDate.minusDays(1);
+        List<ProductDiscountDTO> products = productRepository.findProductsWithNewlyAddedDiscounts(last24Hours);
+        return products;
+    
+       }
 }

@@ -1,6 +1,7 @@
 package com.example.spring_boot.DTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class ProductDiscountDTO {
     private String category;
     private String supermarketName;
     private BigDecimal discountPercentage;
+    private LocalDate fromDate;
+    private LocalDate toDate;
     
 
 @Override
@@ -30,6 +33,8 @@ public String toString() {
             ", category='" + category + '\'' +
             ", supermarket='" + supermarketName + '\'' +
             ", discount percentage='" + discountPercentage + '\'' +
+            ", from_date='" + fromDate + '\'' +
+            ", to_date='" + toDate + '\'' +
             '}';
 }
 }

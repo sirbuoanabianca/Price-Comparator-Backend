@@ -14,11 +14,22 @@ import com.example.spring_boot.Model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
      @Query("SELECT new com.example.spring_boot.DTO.ProductDiscountDTO(p.id, p.name, p.brand, p.category, " +
-       "s.name, d.percentage) " +
+       "s.name, d.percentage, d.fromDate, d.toDate) " +
        "FROM Product p " +
        "JOIN Discount d ON d.product = p " +
        "JOIN Supermarket s ON d.supermarket = s " +
        "WHERE d.fromDate <= :currentDate AND d.toDate >= :currentDate " +
        "ORDER BY d.percentage DESC")
     List<ProductDiscountDTO> findProductsWithActiveDiscounts(@Param("currentDate") LocalDate currentDate);
+
+
+    @Query("SELECT new com.example.spring_boot.DTO.ProductDiscountDTO(p.id, p.name, p.brand, p.category, " +
+       "s.name, d.percentage, d.fromDate, d.toDate) " +
+       "FROM Product p " +
+       "JOIN Discount d ON d.product = p " +
+       "JOIN Supermarket s ON d.supermarket = s " +
+       "WHERE d.fromDate >= :last24Hours " +
+       "ORDER BY d.fromDate DESC")
+    List<ProductDiscountDTO> findProductsWithNewlyAddedDiscounts(@Param("last24Hours") LocalDate last24Hours);
+
 }
