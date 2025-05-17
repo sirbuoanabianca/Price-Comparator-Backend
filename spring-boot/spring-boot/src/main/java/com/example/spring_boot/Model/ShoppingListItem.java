@@ -47,4 +47,7 @@ public class ShoppingListItem {
 
     @Column(name = "target_price", precision = 10, scale = 2)
     private BigDecimal targetPrice;
+
+    @Column(name = "ignore_brand", nullable = false)
+    private Boolean ignoreBrand;
 }
