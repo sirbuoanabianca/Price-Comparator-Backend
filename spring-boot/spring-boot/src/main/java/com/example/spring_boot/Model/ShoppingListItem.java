@@ -39,15 +39,15 @@ public class ShoppingListItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "unit", nullable = false, length = 50)
+    @Column(name = "unit", length = 50, nullable=true)
     private String unit; 
 
-    @Column(name = "quantity_desired", nullable = false, precision = 10, scale = 2) 
+    @Column(name = "quantity_desired", precision = 10, scale = 2) 
     private BigDecimal quantityDesired;
 
     @Column(name = "target_price", precision = 10, scale = 2)
     private BigDecimal targetPrice;
 
-    @Column(name = "ignore_brand", nullable = false)
-    private Boolean ignoreBrand;
+    @Column(name = "ignore_brand")
+    private Boolean ignoreBrand=false;
 }

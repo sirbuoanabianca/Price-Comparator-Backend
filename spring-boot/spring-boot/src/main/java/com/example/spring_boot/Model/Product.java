@@ -38,7 +38,6 @@ public class Product {
     @Column(name = "category", length = 255) 
     private String category;
 
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ProductSupermarket> productSupermarket = new HashSet<>();
 
