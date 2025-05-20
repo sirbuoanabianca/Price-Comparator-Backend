@@ -7,15 +7,16 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.spring_boot.DTO.ProductSupermarketDTO;
 import com.example.spring_boot.DTO.ProductValuePerUnitDTO;
-import com.example.spring_boot.Repository.DiscountRepository;
+import com.example.spring_boot.Mapper.ProductSupermarketMapper;
 import com.example.spring_boot.Repository.ProductSupermarketRepository;
 
 @Service
 public class PriceService {
 
-    @Autowired
-    private DiscountRepository discountRepository;
+    @Autowired 
+    private ProductSupermarketMapper productSupermarketMapper;
 
     @Autowired
     private ProductSupermarketRepository productSupermarketRepository;
@@ -85,7 +86,10 @@ public class PriceService {
         products.sort((p1, p2) -> p1.getDiscountedValuePerUnit()
                 .compareTo(p2.getDiscountedValuePerUnit()));
         return products;
-
     }
+     public List<ProductSupermarketDTO> getPriceHistory(Integer supermarketId, String brand, String category){
+        List<ProductSupermarketDTO> products = productSupermarketRepository.findProductSupermarketHistoryFiltered(supermarketId, brand, category);
+        return products;
+     }
 
 }
