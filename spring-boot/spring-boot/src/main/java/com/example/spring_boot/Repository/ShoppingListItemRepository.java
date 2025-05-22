@@ -22,8 +22,11 @@ public interface ShoppingListItemRepository extends JpaRepository<ShoppingListIt
         FROM ShoppingListItem sli
         WHERE sli.shoppingList.id = :shoppingListId
     """)
-    
     List<ProductDTO> findProductsInShoppingList(Integer shoppingListId);
 
     ShoppingListItem findByShoppingListIdAndProductId(Integer shoppingListId, Integer productId);
+
+    ShoppingListItem findByProductIdAndShoppingListId(Integer productId, Integer shoppingListId);
+
+    List<ShoppingListItem> findByTargetPriceIsNotNull();
 }

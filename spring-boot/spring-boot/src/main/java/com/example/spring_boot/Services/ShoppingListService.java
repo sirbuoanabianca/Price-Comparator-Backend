@@ -1,12 +1,13 @@
 package com.example.spring_boot.Services;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.spring_boot.DTO.ProductDTO;
 import com.example.spring_boot.DTO.ProductValuePerUnitDTO;
 import com.example.spring_boot.DTO.ShoppingListDTO;
 import com.example.spring_boot.Model.Product;
@@ -48,7 +49,7 @@ public class ShoppingListService {
         return shoppingListRepository.save(shoppingList);
     }
 
-    public ShoppingListItem addShoppingListItem(Integer productId, Integer shoppingListId, BigDecimal quantityDesired) {
+    public ShoppingListItem addShoppingListItem(Integer productId, Integer shoppingListId, BigDecimal quantityDesired, Boolean ignoreBrand) {
         ShoppingList shoppingList = shoppingListRepository.findById(shoppingListId)
                 .orElseThrow(() -> new RuntimeException(
                 "Shopping list not found with id: " + shoppingListId));
@@ -68,6 +69,7 @@ public class ShoppingListService {
         shoppingListItem.setProduct(product);
         shoppingListItem.setShoppingList(shoppingList);
         shoppingListItem.setQuantityDesired(quantityDesired);
+        shoppingListItem.setIgnoreBrand(ignoreBrand);
 
         return shoppingListItemRepository.save(shoppingListItem);
     }
@@ -75,18 +77,27 @@ public class ShoppingListService {
     /**
      *
      * @param shoppingListId which shopping list to split
-     * @return List<ProductValuePerUnitDTO> with the best deals for each product
-     * in the shopping list
+     * @return List<ProductValuePerUnitDTO> with the best deal for each product
+     * in the shopping list in the shopping list
      */
     public List<ProductValuePerUnitDTO> getBestDeals(Integer shoppingListId) {
         ShoppingList shoppingList = shoppingListRepository.findById(shoppingListId)
                 .orElseThrow(() -> new RuntimeException(
                 "Shopping list not found with id: " + shoppingListId));
-        List<ProductDTO> products = shoppingListItemRepository.findProductsInShoppingList(shoppingListId);
-        return products.stream()
-                .map((ProductDTO product) -> priceService.getBestDealByProductName(product.getName()).stream().findFirst().orElse(null))
-                .filter(dto -> dto != null)
-                .toList();
+        Set<ShoppingListItem> shoppingListItems = shoppingListRepository.getItemsById(shoppingListId);
+
+        List<ProductValuePerUnitDTO> bestDeals = new ArrayList<>();
+        for (ShoppingListItem item : shoppingListItems) {
+            Product product = item.getProduct();
+            ProductValuePerUnitDTO bestDeal = priceService.getBestDealByProductNameAndBrandIfSet(product.getName(), item.getIgnoreBrand(), product.getBrand())
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+            if (bestDeal != null) {
+                bestDeals.add(bestDeal);
+            }
+        }
+        return bestDeals;
     }
 
 }

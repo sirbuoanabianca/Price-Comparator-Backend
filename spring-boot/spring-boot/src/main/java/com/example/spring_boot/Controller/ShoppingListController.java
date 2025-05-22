@@ -44,8 +44,9 @@ public class ShoppingListController {
      @PostMapping("/add-item")
     public ResponseEntity<ShoppingListItemDTO> addShoppingListItem(@RequestParam Integer productId,
             @RequestParam Integer shoppingListId,
-            @RequestParam BigDecimal quantityDesired) {
-        ShoppingListItem createdShoppingListItemEntity = shoppingListService.addShoppingListItem(productId, shoppingListId, quantityDesired);
+            @RequestParam BigDecimal quantityDesired,
+            @RequestParam(name="ignoreBrand", required=false) Boolean ignoreBrand) {
+        ShoppingListItem createdShoppingListItemEntity = shoppingListService.addShoppingListItem(productId, shoppingListId, quantityDesired, ignoreBrand);
 
         return ResponseEntity.ok(shoppingListItemMapper.toDTO(createdShoppingListItemEntity));
     }
