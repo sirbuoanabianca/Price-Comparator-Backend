@@ -1,6 +1,5 @@
 package com.example.spring_boot.Controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.spring_boot.DTO.AddShoppingListItemRequest;
 import com.example.spring_boot.DTO.ProductValuePerUnitDTO;
 import com.example.spring_boot.DTO.ShoppingListDTO;
 import com.example.spring_boot.DTO.ShoppingListItemDTO;
@@ -41,12 +41,9 @@ public class ShoppingListController {
         return ResponseEntity.ok(shoppingListMapper.toDTO(createdShoppingListEntity));
     }
 
-     @PostMapping("/add-item")
-    public ResponseEntity<ShoppingListItemDTO> addShoppingListItem(@RequestParam Integer productId,
-            @RequestParam Integer shoppingListId,
-            @RequestParam BigDecimal quantityDesired,
-            @RequestParam(name="ignoreBrand", required=false) Boolean ignoreBrand) {
-        ShoppingListItem createdShoppingListItemEntity = shoppingListService.addShoppingListItem(productId, shoppingListId, quantityDesired, ignoreBrand);
+    @PostMapping("/add-item")
+    public ResponseEntity<ShoppingListItemDTO> addShoppingListItem(@RequestBody AddShoppingListItemRequest request) {
+        ShoppingListItem createdShoppingListItemEntity = shoppingListService.addShoppingListItem(request.getProductId(), request.getShoppingListId(), request.getQuantityDesired(), request.getIgnoreBrand());
 
         return ResponseEntity.ok(shoppingListItemMapper.toDTO(createdShoppingListItemEntity));
     }

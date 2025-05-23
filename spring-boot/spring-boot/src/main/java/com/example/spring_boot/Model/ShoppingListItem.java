@@ -39,9 +39,6 @@ public class ShoppingListItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "unit", length = 50, nullable=true) //TODO: must be removed
-    private String unit; 
-
     @Column(name = "quantity_desired", precision = 10, scale = 2) 
     private BigDecimal quantityDesired;
 

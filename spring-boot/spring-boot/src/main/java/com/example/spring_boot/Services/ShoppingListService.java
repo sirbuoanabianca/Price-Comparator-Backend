@@ -69,8 +69,7 @@ public class ShoppingListService {
         shoppingListItem.setProduct(product);
         shoppingListItem.setShoppingList(shoppingList);
         shoppingListItem.setQuantityDesired(quantityDesired);
-        shoppingListItem.setIgnoreBrand(ignoreBrand);
-
+        shoppingListItem.setIgnoreBrand(ignoreBrand != null ? ignoreBrand : false);
         return shoppingListItemRepository.save(shoppingListItem);
     }
 
@@ -84,7 +83,7 @@ public class ShoppingListService {
         ShoppingList shoppingList = shoppingListRepository.findById(shoppingListId)
                 .orElseThrow(() -> new RuntimeException(
                 "Shopping list not found with id: " + shoppingListId));
-        Set<ShoppingListItem> shoppingListItems = shoppingListRepository.getItemsById(shoppingListId);
+        Set<ShoppingListItem> shoppingListItems = shoppingList.getItems();
 
         List<ProductValuePerUnitDTO> bestDeals = new ArrayList<>();
         for (ShoppingListItem item : shoppingListItems) {

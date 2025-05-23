@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.spring_boot.DTO.CSVParsingRequest;
 import com.example.spring_boot.Services.CSVParserService;
 
 @RestController
@@ -20,9 +21,9 @@ public class CSVParserController {
     private CSVParserService csvParserService;
 
     @PostMapping("/parse-CSV")
-    public ResponseEntity<?> loadFromClasspath(@RequestParam String filename) {
+    public ResponseEntity<?> loadFromClasspath(@RequestBody CSVParsingRequest request) {
         try {
-            csvParserService.parseCSV(filename);
+            csvParserService.parseCSV(request.getFilename());
             return ResponseEntity.ok("CSV file parsed successfully and data saved to database.");
         } catch (IOException e) {
             e.printStackTrace();
