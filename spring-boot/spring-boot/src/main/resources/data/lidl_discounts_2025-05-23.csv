@@ -1,0 +1,5 @@
+product_id;product_name;brand;package_quantity;package_unit;product_category;from_date;to_date;percentage_of_discount
+P003;iaurt grecesc;Olympus;0.4;kg;lactate;2025-05-23;2025-05-29;12
+P020;spaghetti nr.5;Barilla;500;g;paste făinoase;2025-05-23;2025-05-25;18
+P027;banane;Generic;1;kg;legume și fructe;2025-05-23;2025-05-28;8
+P042;șampon păr gras;Schauma;400;ml;îngrijire personală;2025-05-23;2025-05-08;16
